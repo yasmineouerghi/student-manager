@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +22,15 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
-              <li class="nav-item">
+             
+            
+                <li class="nav-item">       
                 <a class="nav-link" href="Student.php">Student List</a>
               </li>
+
+
+ 
+           
               <li class="nav-item">
                 <a class="nav-link" href="Section.php">Section List</a>
               </li>

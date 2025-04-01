@@ -1,4 +1,6 @@
 <?php
+session_start();
+// Check if the user is logged in, if not redirect to login page
 include_once "autoload.php"; 
 $bdd= ConnexionBDSection::getInstance();
 $query="select * from section";
@@ -61,13 +63,28 @@ $sections=$response->fetchAll(PDO::FETCH_OBJ);
             <td> <?= $section->designation?></td>
             <td> <?= $section->description?></td>
             <td>
-            <a href="sectionlist.php"> <img style="width:30px ; height:30px" src="icons\list-ul-alt-svgrepo-com.svg" alt="infos"></a>
-            </td>
-        </tr>
+     
+            <?php
+            if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {?>
+           <a href="sectionlist.php"> <img style="width:30px ; height:30px" src="icons\list-ul-alt-svgrepo-com.svg" alt="infos"></a>
+            
+ <?php } else { ?>
+  <div>
+     <a href="sectionlist.php"> <img style="width:30px ; height:30px" src="icons\list-ul-alt-svgrepo-com.svg" alt="infos"></a>
+     <a href="">  <img  style="width:30px ; height:30px" src="icons\add-circle-svgrepo-com.svg" alt=""> </a>
+     <a href=""><img   style="width:30px ; height:30px" src="icons\update-svgrepo-com.svg" alt=""> </a>
+     <a href=""> <img  style="width:30px ; height:30px" src="icons\delete-svgrepo-com.svg" alt=""> </a>
+    </div>
+    </td>
+    </tr>
+               
+  <?php } ?>
+        <?php } ?>
+        
+    
     
        
-        <?php } ?>
-
+      
 
     </table>
 

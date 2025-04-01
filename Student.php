@@ -1,10 +1,12 @@
 <?php
+session_start();
 include_once "autoload.php"; 
 $bdd= ConnexionBDStudent::getInstance();
 $query="select * from students";
 $response=$bdd->query($query);
 $students=$response->fetchAll(PDO::FETCH_OBJ); //tableau associatif contenant les infos des etudiants
 //var_dump($students);
+var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -63,13 +65,20 @@ $students=$response->fetchAll(PDO::FETCH_OBJ); //tableau associatif contenant le
             <td> <?= $student->student_name?></td>
             <td> <?= $student->student_birthday?></td>
             <td>
-            <a href="DetailStudent.php?id=<?= $student->student_id ?>">
-                <div>
-                <img style="width:30px ; height:30px" src="icons\info-circle-svgrepo-com (1).svg" alt="infos"></a>
-                <img  style="width:30px ; height:30px" src="icons\add-circle-svgrepo-com.svg" alt="">
-                <img   style="width:30px ; height:30px" src="icons\update-svgrepo-com.svg" alt="">
-                <img  style="width:30px ; height:30px" src="icons\delete-svgrepo-com.svg" alt="">
+              <?php
+            if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {?>
+            <a href="DetailStudent.php?id=<?= $student->student_id ?>"> <img style="width:30px ; height:30px" src="icons\info-circle-svgrepo-com (1).svg" alt="infos"></a>
+
+ <?php } else { ?>
+  <div>
+                <a href="DetailStudent.php?id=<?= $student->student_id ?>"> <img style="width:30px ; height:30px" src="icons\info-circle-svgrepo-com (1).svg" alt="infos"></a>
+                <a href="">  <img  style="width:30px ; height:30px" src="icons\add-circle-svgrepo-com.svg" alt=""> </a>
+                <a href=""><img   style="width:30px ; height:30px" src="icons\update-svgrepo-com.svg" alt=""> </a>
+                <a href=""> <img  style="width:30px ; height:30px" src="icons\delete-svgrepo-com.svg" alt=""> </a>
             </div>
+            <?php } ?>
+
+                
             </td>
 
                
