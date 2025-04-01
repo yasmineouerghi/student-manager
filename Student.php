@@ -6,7 +6,7 @@ $query="select * from students";
 $response=$bdd->query($query);
 $students=$response->fetchAll(PDO::FETCH_OBJ); //tableau associatif contenant les infos des etudiants
 //var_dump($students);
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
